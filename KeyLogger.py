@@ -1,6 +1,7 @@
 #! /usr/bin/env python3
 import pynput
 import threading
+import smtplib
 
 # to replace none special charcters edit try area
 
